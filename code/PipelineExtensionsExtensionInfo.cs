@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 namespace PipelineExtensions.EntityFrameworkCore
 {
     /// <summary>
-    ///     Information/metadata for an <see cref="IDbContextOptionsExtension" />.
+    /// Information and metadata for the <see cref="PipelineExtensionsOptionsExtension" />.
     /// </summary>
     internal class PipelineExtensionsExtensionInfo : DbContextOptionsExtensionInfo
     {

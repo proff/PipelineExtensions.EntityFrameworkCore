@@ -16,6 +16,9 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace PipelineExtensions.EntityFrameworkCore
 {
+    /// <summary>
+    /// Implements <see cref="IQueryCompiler"/> by wrapping the original compiler and allowing interception through a pipeline of <see cref="IPipelineQueryCompiler"/> instances.
+    /// </summary>
     internal class PipelineQueryCompiler : IQueryCompiler
     {
         private static readonly ConcurrentDictionary<(Type, QueryCompilerMethodEnum), object> CallersCache =
@@ -28,8 +31,20 @@ namespace PipelineExtensions.EntityFrameworkCore
         private readonly Dictionary<(Type, QueryCompilerMethodEnum), object> _pipelines =
             new Dictionary<(Type, QueryCompilerMethodEnum), object>();
 #if !EFCORE5_OR_GREATER
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PipelineQueryCompiler"/> class.
+        /// </summary>
+        /// <param name="options">The database context options.</param>
+        /// <param name="dbContext">The current database context.</param>
+        /// <param name="compiler">The original query compiler.</param>
         public PipelineQueryCompiler(IDbContextOptions options, ICurrentDbContext dbContext, QueryCompiler compiler)
 #else
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PipelineQueryCompiler"/> class.
+        /// </summary>
+        /// <param name="options">The database context options.</param>
+        /// <param name="dbContext">The current database context.</param>
+        /// <param name="descriptors">The original service descriptors.</param>
       public PipelineQueryCompiler(IDbContextOptions options, ICurrentDbContext dbContext, PipelineExtensionsOriginalServicesDescriptors descriptors)
 #endif
         {

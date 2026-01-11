@@ -6,11 +6,19 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace PipelineExtensions.EntityFrameworkCore
 {
+    /// <summary>
+    /// Provides extension methods for configuring Entity Framework Core to use pipeline-based query compilation.
+    /// </summary>
     public static class EntityFrameworkConfigurationExtensions
     {
+        /// <summary>
+        /// Registers a query compiler of type <typeparamref name="T"/> in the query execution pipeline.
+        /// </summary>
+        /// <typeparam name="T">The type of the pipeline query compiler to add.</typeparam>
+        /// <param name="optionsBuilder">The <see cref="DbContextOptionsBuilder"/> being configured.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static DbContextOptionsBuilder AddQueryCompiler<T>(this DbContextOptionsBuilder optionsBuilder) where T : IPipelineQueryCompiler
         {
-            //todo register
             var options = GetOptions(optionsBuilder);
             if (options.QueryCompilers.Count == 0)
             {
@@ -20,12 +28,14 @@ namespace PipelineExtensions.EntityFrameworkCore
             return optionsBuilder;
         }
 
-        /*public static DbContextOptionsBuilder AddQueryCompiler<TOptions, T>(this DbContextOptionsBuilder optionsBuilder, Type type)
-            where T : IPipelineQueryCompiler
-        {
-            return AddQueryCompiler(optionsBuilder, () => Activator.CreateInstance(type));
-        }*/
-        
+        /// <summary>
+        /// Registers a query compiler of type <typeparamref name="T"/> in the query execution pipeline.
+        /// </summary>
+        /// <typeparam name="TOptions">The type of the <see cref="DbContext"/> being configured.</typeparam>
+        /// <typeparam name="T">The type of the pipeline query compiler to add.</typeparam>
+        /// <param name="optionsBuilder">The <see cref="DbContextOptionsBuilder{TOptions}"/> being configured.</param>
+        /// <param name="queryCompiler">A factory to create the query compiler instance.</param>
+        /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static DbContextOptionsBuilder<TOptions> AddQueryCompiler<TOptions, T>(this DbContextOptionsBuilder<TOptions> optionsBuilder, Func<T> queryCompiler) where TOptions : DbContext where T : IPipelineQueryCompiler
         {
             var options = GetOptions(optionsBuilder);
@@ -43,11 +53,6 @@ namespace PipelineExtensions.EntityFrameworkCore
             if (extension == null)
             {
                 extension = new PipelineExtensionsOptionsExtension();
-                /*if (TryGetReplacedService<IQueryTranslationPreprocessorFactory>(optionsBuilder, out var type))
-                    extension.PreviousReplacedQueryTranslationPreprocessorFactory = type;
-
-                if (TryGetReplacedService<IQueryTranslationPostprocessorFactory>(optionsBuilder, out type))
-                    extension.PreviousReplacedQueryTranslationPostprocessorFactory = type;*/
 
                 if (TryGetReplacedService<IQueryCompiler>(optionsBuilder, out var type)) extension.PreviousReplacedQueryCompiler = type;
 
