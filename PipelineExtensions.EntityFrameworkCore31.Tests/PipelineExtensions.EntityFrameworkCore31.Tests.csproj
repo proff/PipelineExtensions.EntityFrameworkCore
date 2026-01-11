@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+
+        <IsPackable>false</IsPackable>
+
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Include="..\tests\Entity.cs" Link="Entity.cs" />
+      <Compile Include="..\tests\TestContext.cs" Link="TestContext.cs" />
+      <Compile Include="..\tests\PipelineExtensionTests.cs" Link="PipelineExtensionTests.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
+        <PackageReference Include="NUnit" Version="3.13.3" />
+        <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\PipelineExtensions.EntityFrameworkCore31\PipelineExtensions.EntityFrameworkCore31.csproj" />
+    </ItemGroup>
+
+</Project>

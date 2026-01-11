@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net10.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="BenchmarkDotNet" Version="0.15.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="10.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\PipelineExtensions.EntityFrameworkCore10.Tests\PipelineExtensions.EntityFrameworkCore10.Tests.csproj" />
+      <ProjectReference Include="..\PipelineExtensions.EntityFrameworkCore10\PipelineExtensions.EntityFrameworkCore10.csproj" />
+    </ItemGroup>
+
+</Project>

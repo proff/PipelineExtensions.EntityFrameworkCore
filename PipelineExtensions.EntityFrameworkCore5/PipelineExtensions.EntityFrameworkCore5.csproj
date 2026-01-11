@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+	    <AssemblyName>PipelineExtensions.EntityFrameworkCore</AssemblyName>
+	    <TargetFramework>netstandard2.1</TargetFramework>
+        <DefineConstants>$(DefineConstants);EFCORE21_OR_GREATER;EFCORE3_OR_GREATER;EFCORE31_OR_GREATER;EFCORE5;EFCORE5_OR_GREATER</DefineConstants>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Include="..\code\EntityFrameworkConfigurationExtensions.cs" Link="EntityFrameworkConfigurationExtensions.cs" />
+      <Compile Include="..\code\IPipelineQueryCompiler.cs" Link="IPipelineQueryCompiler.cs" />
+      <Compile Include="..\code\PipelineExtensionsExtensionInfo.cs" Link="PipelineExtensionsExtensionInfo.cs" />
+      <Compile Include="..\code\PipelineExtensionsOptionsExtension.cs" Link="PipelineExtensionsOptionsExtension.cs" />
+      <Compile Include="..\code\PipelineExtensionsOriginalServicesDescriptors.cs" Link="PipelineExtensionsOriginalServicesDescriptors.cs" />
+      <Compile Include="..\code\PipelineQueryCompiler.cs" Link="PipelineQueryCompiler.cs" />
+      <Compile Include="..\code\QueryCompilerMethodEnum.cs" Link="QueryCompilerMethodEnum.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
+    </ItemGroup>
+
+</Project>
